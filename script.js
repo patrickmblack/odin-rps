@@ -1,8 +1,22 @@
-console.log(getPlayerChoice())
-console.log(getComputerChoice())
+//console.log(getWinner(getPlayerChoice(), getComputerChoice()))
 
+game()
 
+function game(){
+    let numOfGames = parseInt(prompt("How many games would you like to play?"))
 
+    for (let i = 0; i < numOfGames; i++){
+        playRound()
+    }
+}
+
+function playRound(){
+    let playerChoice = getPlayerChoice()
+    let computerChoice = getComputerChoice()
+    let winner = getWinner(playerChoice, computerChoice)
+
+    console.log(`${playerChoice} and ${computerChoice}, ${winner}`)
+}
 
 function getComputerChoice(){
 
@@ -35,9 +49,32 @@ function getPlayerChoice(){
     }
 }
 
-function getWinner(computer, player){
-    
+function getWinner(player, computer){
+    if (player === computer){
+        return "Tie!"
+    }
+
+    if (player === "Rock"){
+        switch(computer){
+            case "Paper":
+                return "Computer wins!"
+            case "Scissors":
+                return "Player wins!"
+        }
+    } else if (player === "Paper"){
+        switch(computer){
+            case "Rock":
+                return "Player wins!"
+            case "Scissors":
+                return "Computer wins!"
+        }
+    }else{
+        switch(computer){
+            case "Rock":
+                return "Computer wins!"
+            case "Paper":
+                return "Player wins!"
+        }
+    }
 }
-// for (let i = 0; i < 10; i++){
-//     console.log(getComputerChoice())
-// }
+
