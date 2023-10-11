@@ -9,6 +9,7 @@ let gameActive = true
 
 
 const score = document.querySelector('.score')
+const scoreboard = document.querySelector('#scoreboard')
 const historyList = document.querySelector('.history')
 
 game()
@@ -65,10 +66,7 @@ function playRound(choice){
     } else if (computerScore == 5){
         gameActive = false
         winnerText = 'Computer wins the game!'
-    } else if (ties == 5){
-        gameActive = false
-        winnerText = 'Tie! No one wins.'
-    }    
+    }   
     
     listItem.appendChild(listText)
     listText.textContent = `Round ${roundNumber}: ${playerChoice} vs ${computerChoice}: ${resultText}`
@@ -82,6 +80,20 @@ function playRound(choice){
 
 
     historyList.appendChild(listItem)
+
+    if (gameActive == false){
+        resetGame()
+    }
+}
+
+function resetGame(){
+    const resetBtn = document.createElement('button')
+
+    scoreboard.appendChild(resetBtn)
+    resetBtn.textContent = 'Reset Game'
+    resetBtn.addEventListener('click', () =>{
+        location.reload()
+    })
 }
 
 
