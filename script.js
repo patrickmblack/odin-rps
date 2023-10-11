@@ -4,6 +4,9 @@ game()
 
 
 function game(){
+    
+
+
     const buttons = document.querySelectorAll('button');
 
     buttons.forEach((button) => {
@@ -12,22 +15,20 @@ function game(){
             playRound(button.id);
         })
     })
-
-    // let numOfGames = parseInt(prompt("How many games would you like to play?"))
- 
-    // for (let i = 0; i < numOfGames; i++){
-    //     playRound()
-    // }
 }
 
 function playRound(choice){
 
+    const score = document.querySelector('.score')
+    score.textContent = '0'
 
     let playerChoice = choice
     let computerChoice = getComputerChoice()
     let winner = getWinner(playerChoice, computerChoice)
 
     console.log(`Player chooses ${playerChoice}\nComputer chooses ${computerChoice}\n${winner}`)
+
+
 }
 
 function getComputerChoice(){
@@ -41,30 +42,6 @@ function getComputerChoice(){
             return "Scissors"
     }
 }
-
-
-
-// function getPlayerChoice(){
-//     //let playerInput = prompt("[Rock / Paper / Scissors]\n")
-//     let validInput = false
-
-
-
-
-//     while(!validInput){
-//         switch(prompt("[Rock / Paper / Scissors]\n").slice(0, 1).toUpperCase()){
-//             case "R":
-//                 validInput = true
-//                 return "Rock"
-//             case "P":
-//                 validInput = true
-//                 return "Paper"
-//             case "S":
-//                 validInput = true
-//                 return "Scissors"
-//         }
-//     }
-// }
 
 function getWinner(player, computer){
     if (player === computer){
