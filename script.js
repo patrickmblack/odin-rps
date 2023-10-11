@@ -1,7 +1,13 @@
 //console.log(getWinner(getPlayerChoice(), getComputerChoice()))
+
+let playerScore = 0
+let computerScore = 0
+let ties = 0
+
+
+const score = document.querySelector('.score')
+
 game()
-
-
 
 function game(){
     
@@ -19,15 +25,22 @@ function game(){
 
 function playRound(choice){
 
-    const score = document.querySelector('.score')
-    score.textContent = '0'
-
     let playerChoice = choice
     let computerChoice = getComputerChoice()
-    let winner = getWinner(playerChoice, computerChoice)
+    let result = getResult(playerChoice, computerChoice)
 
-    console.log(`Player chooses ${playerChoice}\nComputer chooses ${computerChoice}\n${winner}`)
+    if (result === 0){
+        ties += 1
+    } else if (result === 1){
+        playerScore += 1
+    } else {
+        computerScore += 1
+    }
 
+    console.log(`Player chooses ${playerChoice}\nComputer chooses ${computerChoice}`)
+    console.log(`${playerScore} - ${ties} - ${computerScore}`)
+    
+    score.textContent = `${playerScore} - ${ties} - ${computerScore}`
 
 }
 
@@ -43,31 +56,36 @@ function getComputerChoice(){
     }
 }
 
-function getWinner(player, computer){
+function getResult(player, computer){
+
+    // Return 0 if tie
+    // Return 1 if player wins
+    // Return 2 if computer wins
+
     if (player === computer){
-        return "Tie!"
+        return 0
     }
 
     if (player === "Rock"){
         switch(computer){
             case "Paper":
-                return "Computer wins!"
+                return 2
             case "Scissors":
-                return "Player wins!"
+                return 1
         }
     } else if (player === "Paper"){
         switch(computer){
             case "Rock":
-                return "Player wins!"
+                return 1
             case "Scissors":
-                return "Computer wins!"
+                return 2
         }
     }else{
         switch(computer){
             case "Rock":
-                return "Computer wins!"
+                return 2
             case "Paper":
-                return "Player wins!"
+                return 1
         }
     }
 }
