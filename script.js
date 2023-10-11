@@ -29,12 +29,12 @@ function playRound(choice){
     let computerChoice = getComputerChoice()
     let result = getResult(playerChoice, computerChoice)
 
-    if (result === 0){
-        ties += 1
-    } else if (result === 1){
+    if (result == "player"){
         playerScore += 1
-    } else {
+    } else if (result == "computer"){
         computerScore += 1
+    } else {
+        ties += 1
     }
 
     console.log(`Player chooses ${playerChoice}\nComputer chooses ${computerChoice}`)
@@ -58,34 +58,30 @@ function getComputerChoice(){
 
 function getResult(player, computer){
 
-    // Return 0 if tie
-    // Return 1 if player wins
-    // Return 2 if computer wins
-
     if (player === computer){
-        return 0
+        return "tie"
     }
 
     if (player === "Rock"){
         switch(computer){
             case "Paper":
-                return 2
+                return "computer"
             case "Scissors":
-                return 1
+                return "player"
         }
     } else if (player === "Paper"){
         switch(computer){
             case "Rock":
-                return 1
+                return "player"
             case "Scissors":
-                return 2
+                return "computer"
         }
     }else{
         switch(computer){
             case "Rock":
-                return 2
+                return "computer"
             case "Paper":
-                return 1
+                return "player"
         }
     }
 }
