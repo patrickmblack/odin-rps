@@ -4,6 +4,8 @@ let playerScore = 0
 let computerScore = 0
 let ties = 0
 
+let roundNumber = 0
+
 
 const score = document.querySelector('.score')
 const historyList = document.querySelector('.history')
@@ -25,6 +27,8 @@ function game(){
 }
 
 function playRound(choice){
+
+    roundNumber += 1
 
     let resultText = ''
 
@@ -54,7 +58,7 @@ function playRound(choice){
     const listText = document.createElement('span')
 
     listItem.appendChild(listText)
-    listText.textContent = `${playerChoice} vs ${computerChoice}: ${resultText}`
+    listText.textContent = `Round ${roundNumber}: ${playerChoice} vs ${computerChoice}: ${resultText}`
     historyList.appendChild(listItem)
 
 
