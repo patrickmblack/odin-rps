@@ -5,6 +5,7 @@ let computerScore = 0
 let ties = 0
 
 let roundNumber = 0
+let gameActive = true
 
 
 const score = document.querySelector('.score')
@@ -13,15 +14,13 @@ const historyList = document.querySelector('.history')
 game()
 
 function game(){
-    
-
-
     const buttons = document.querySelectorAll('button');
-
+  
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            //console.log(button.id) 
-            playRound(button.id);
+            if(gameActive == true){
+                playRound(button.id)
+            }
         })
     })
 }
@@ -31,6 +30,7 @@ function playRound(choice){
     roundNumber += 1
 
     let resultText = ''
+    let winnerText = ''
 
     let playerChoice = choice
     let computerChoice = getComputerChoice()
@@ -57,12 +57,33 @@ function playRound(choice){
     const listItem = document.createElement('li')
     const listText = document.createElement('span')
 
+
+
+    if (playerScore == 5){
+        gameActive = false
+        winnerText = 'Player wins the game!'
+    } else if (computerScore == 5){
+        gameActive = false
+        winnerText = 'Computer wins the game!'
+    } else if (ties == 5){
+        gameActive = false
+        winnerText = 'Tie! No one wins.'
+    }    
+    
     listItem.appendChild(listText)
     listText.textContent = `Round ${roundNumber}: ${playerChoice} vs ${computerChoice}: ${resultText}`
+    
+
+    if (gameActive == false){
+        listText.textContent = `Game over! ${winnerText}`
+    } else {
+        listText.textContent = `Round ${roundNumber}: ${playerChoice} vs ${computerChoice}: ${resultText}`
+    }
+
+
     historyList.appendChild(listItem)
-
-
 }
+
 
 function getComputerChoice(){
 
